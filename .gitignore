@@ -30,3 +30,9 @@
 *.exe
 *.out
 *.app
+
+# Other
+.vscode
+*.opt
+*.bootinfo*
+*.compileinfo

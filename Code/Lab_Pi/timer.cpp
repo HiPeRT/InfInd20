@@ -49,16 +49,20 @@ int main()
     // Ok, inited. Now do your work...
 
     bool onoff = true;
+    unsigned int count = 0;
 
     while(1)
     {
        	// We can now add our custom logics here
 	    /////
+        cout << "Current value is " << count << endl;
 
         // If this led blinks, then the loop is working
         setLed(led_Blue, onoff);
         onoff = !onoff;
 
+        // Increment timer counter
+        count++;
 #ifndef NO_PI
         delay(timeoutMs);
 #else
