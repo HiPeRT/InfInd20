@@ -1,5 +1,5 @@
 /*
- * pthread_create demo 
+ * Semaphore demo 
  *
  * Copyright (C) 2002 by Paolo Gai
  *
@@ -21,68 +21,51 @@
 
 #include <stdio.h>
 #include <pthread.h>
+#include <semaphore.h>
 
-pthread_t main_id;
-int pippo = 5;
+sem_t mysem;
 
 void *body(void *arg)
 {
-  int p = *(int *)arg;
-  pthread_t mythread_id;
+  int i,j;
+  char *mychar = (char *)arg;
+  
+  sem_wait(&mysem);
+  for (j=0; j<40; j++) {
+    
+    //sem_wait(&mysem);
+    
+    for (i=0; i<1000000; i++) // Simulate fake work, or wait for some computation
+      ;
 
-  printf("mythread: parameter=%d\n", p);
+    fprintf(stderr, mychar);
 
-  mythread_id = pthread_self();
+    //sem_post(&mysem);
+  }
+  sem_post(&mysem);
 
-  printf("mythread: main_id==mythread_id:%d\n", 
-	 pthread_equal(main_id, mythread_id) );
-
-  return (void *)5678;
+  return NULL;
 }
 
 int main()
 {
+  pthread_t t1,t2,t3;
   pthread_attr_t myattr;
-  pthread_t thethread;
   int err;
-  int parameter;
-  void *returnvalue;
 
-  parameter = 1234;
+  sem_init(&mysem,0,1);
 
-  /* initializes the thread attribute */
   pthread_attr_init(&myattr);
-
-
-  puts("main: before pthread_create\n");
-  main_id = pthread_self();
-
-
-  /* creation and activation of the new thread */
-  err = pthread_create(&thethread, &myattr, body, (void *)&parameter);
-
-  puts("main: after pthread_create\n");
-
-  /* the thread attribute is no more needed */
+  err = pthread_create(&t1, &myattr, body, (void *)".");
+  err = pthread_create(&t2, &myattr, body, (void *)"#");
+  err = pthread_create(&t3, &myattr, body, (void *)"o");
   pthread_attr_destroy(&myattr);
 
-  /* wait the end of the thread we just created */
-  pthread_join(thethread, &returnvalue);
+  pthread_join(t1, NULL);
+  pthread_join(t2, NULL);
+  pthread_join(t3, NULL);
 
-  printf("main: returnvalue is %d\n", (int)returnvalue);
+  printf("\n");
 
   return 0;
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
