@@ -19,7 +19,7 @@ void * pthreads_fn(void * args)
     }
 
     printf("CHUNCK\n");
-    sleep(10);
+    //sleep(10);
     
     return NULL;
 
