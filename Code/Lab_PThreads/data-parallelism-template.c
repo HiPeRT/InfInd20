@@ -1,8 +1,9 @@
 #include <stdio.h>
 #include <pthread.h>
 
-const unsigned int NUM_THREADS = 4;
-const unsigned int N_ELEMENTS = 20;
+#define NUM_THREADS 4
+#define N_ELEMENTS 20
+
 int arr[N_ELEMENTS];
 
 // void * is "like" Object for Java: can be used for generic type
@@ -20,7 +21,6 @@ void * pthreads_fn(void * args)
 
 int main()
 {
-    const unsigned int NUM_THREADS = 16;
     pthread_t mythreads[NUM_THREADS];
     pthread_attr_t myattr;
     void *returnvalue;
