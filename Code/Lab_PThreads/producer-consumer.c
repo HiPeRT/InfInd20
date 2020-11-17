@@ -33,7 +33,7 @@ int main()
     int err;
 
     // Initialize semaphore
-    sem_init(&mysemaphore, 1, 0); // Forget about the former '1', it indicates whether the semaphore is shared among processes
+    sem_init(&mysemaphore, 0, 0); // Forget about the former '1', it indicates whether the semaphore is shared among processes
 
     // Fork two threads
     pthread_attr_init(&myattr);
