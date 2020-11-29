@@ -1,6 +1,8 @@
 #include <stdio.h>
 #include <cuda.h>
 
+int arr[15];
+
 __global__ void funzione()
 {
   //printf("\t\t\t\t\t[DEVICE] Hello World!\n");
@@ -10,6 +12,13 @@ __global__ void funzione()
   
   int thrNum = blockDim.x;
   int blkNum = gridDim.x;
+
+  int i =  threadIdx.x + blockIdx.x * blockDim.x;
+  // every thread has a unique i
+  if(i >= 6)
+    return;
+
+  arr[i] = i*2;// qualcosa
   
   printf("\t\t\t\t\t[DEVICE] Hello World! I am thread #%d out of %d, and I belong to block #%d out of %d\n", thrId, thrNum, blkId, blkNum);
   
