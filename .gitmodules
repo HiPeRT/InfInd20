@@ -1,0 +1,3 @@
+[submodule "Code/Lab_Pi/Java/mqtt-playground"]
+	path = Code/Lab_Pi/Java/mqtt-playground
+	url = https://github.com/Intelligent-Internet-of-Things-Course/mqtt-playground.git
