@@ -27,13 +27,13 @@ public class AuthConsumer {
     private static int BROKER_PORT = 7883;
 
     //MQTT account username to connect to the target broker
-    private static final String MQTT_USERNAME = "253299";
+    private static final String MQTT_USERNAME = "username";
 
     //MQTT account password to connect to the target broker
-    private static final String MQTT_PASSWORD = "qyrutpae";
+    private static final String MQTT_PASSWORD = "password";
 
     //Basic Topic used to consume generated demo data (the topic is associated to the user)
-    private static final String MQTT_BASIC_TOPIC = "/iot/user/253299/";
+    private static final String MQTT_BASIC_TOPIC = "/iot/user/username/";
 
     private static final String CONTROL_TOPIC = "control";
 
