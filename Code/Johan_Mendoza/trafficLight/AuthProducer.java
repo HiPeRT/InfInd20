@@ -29,13 +29,13 @@ public class AuthProducer {
     private static final int MESSAGE_COUNT = 1000;
 
     //MQTT account username to connect to the target broker
-    private static final String MQTT_USERNAME = "253299";
+    private static final String MQTT_USERNAME = "username";
 
     //MQTT account password to connect to the target broker
-    private static final String MQTT_PASSWORD = "qyrutpae";
+    private static final String MQTT_PASSWORD = "paswword";
 
     //Basic Topic used to publish generated demo data (the topic is associated to the user)
-    private static final String MQTT_BASIC_TOPIC = "/iot/user/253299/";
+    private static final String MQTT_BASIC_TOPIC = "/iot/user/username/";
 
     //Additional Topic structure used to publish generated demo data. It is merged with the Basic Topic to obtain
     //the final used topic
