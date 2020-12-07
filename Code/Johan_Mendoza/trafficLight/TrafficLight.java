@@ -19,36 +19,32 @@ public class TrafficLight extends Thread {
 
     private int currentState;
 
-    // create gpio controller
-    final GpioController gpio = GpioFactory.getInstance();
-
-    final GpioPinDigitalOutput[] pins = {
-            gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW),
-            gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, PinState.LOW),
-            gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW)};
+    private GpioPinDigitalOutput[] pins;
 
     public TrafficLight(){
         this.currentState = 0;
     }
+
+    public TrafficLight(GpioPinDigitalOutput[] pins){ this.pins = pins; this.currentState = 0;}
 
     public void NormalCycle(int state) throws InterruptedException {
         switch (state){
             case 0:
                 this.currentState = 2;
                 allLedOffExcept(0);
-                //logger.info("New State: {}", this.currentState);
+                logger.info("New State: {}", this.currentState);
                 Thread.sleep(TIME1*1000);
                 break;
             case 1:
                 this.currentState = 0;
                 allLedOffExcept(1);
-                //logger.info("New State: {}", this.currentState);
+                logger.info("New State: {}", this.currentState);
                 Thread.sleep(TIME3*1000);
                 break;
             case 2:
                 this.currentState = 1;
                 allLedOffExcept(2);
-                //logger.info("New State: {}", this.currentState);
+                logger.info("New State: {}", this.currentState);
                 Thread.sleep(TIME2*1000);
                 break;
             default:
@@ -87,12 +83,15 @@ public class TrafficLight extends Thread {
     //set all led off except one
     private void allLedOffExcept(int lednumber){
         for (int i=0; i<this.pins.length; i++) {
-            if (i == lednumber){
-                continue;
+            if (this.pins[i] == this.pins[lednumber]){
+                System.out.println("Led :" + i +" ON");
+                setLed(i, true);
+            } else{
+                setLed(i, false);
             }
-            setLed(i, false);
         }
     }
+
     //set all led off
     private void allLedOff(){
         for (int i =0; i<this.pins.length; i++){setLed(i,false);}
@@ -102,16 +101,23 @@ public class TrafficLight extends Thread {
 
     public void setCurrentState(int currentState) { this.currentState = currentState; }
 
-
+    public GpioPinDigitalOutput[] getPins() {
+        return pins;
+    }
 
     public static void main(String[] args) throws InterruptedException {
 
-        // set shutdown state for this pin
+        GpioController gpio = GpioFactory.getInstance();
 
-        TrafficLight trafficLight = new TrafficLight();
+        GpioPinDigitalOutput[] pins = {
+                gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW),
+                gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, PinState.LOW),
+                gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW)};
+
+        TrafficLight trafficLight = new TrafficLight(pins);
 
         // set shutdow state for this pin
-        trafficLight.gpio.setShutdownOptions(true, PinState.LOW, trafficLight.pins);
+        gpio.setShutdownOptions(true, PinState.LOW, trafficLight.pins);
 
         int count = 0;
         while (true){
@@ -122,11 +128,12 @@ public class TrafficLight extends Thread {
                 count++;
             }
 
-            if (count >= 1) {
+            if (count >= 4) {
                 trafficLight.setCurrentState(4);
                 trafficLight.BlinkingYellow(trafficLight.getCurrentState());
                 break;
             }
+
 
             logger.info("Currente State: {}",trafficLight.getCurrentState());
             trafficLight.NormalCycle(trafficLight.getCurrentState());

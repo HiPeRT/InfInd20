@@ -1,6 +1,7 @@
 package iot.traffic;
 
 
+import com.pi4j.io.gpio.*;
 import iot.traffic.TrafficLight;
 import org.eclipse.paho.client.mqttv3.*;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -74,8 +75,19 @@ public class AuthProducer {
 
             logger.info("Connected !");
 
+            //create gpio instance
+
+            GpioController gpio = GpioFactory.getInstance();
+            GpioPinDigitalOutput[] pins = {
+                    gpio.provisionDigitalOutputPin(RaspiPin.GPIO_00, PinState.LOW),
+                    gpio.provisionDigitalOutputPin(RaspiPin.GPIO_01, PinState.LOW),
+                    gpio.provisionDigitalOutputPin(RaspiPin.GPIO_02, PinState.LOW)};
+
             //Create an instance of an Engine Temperature Sensor
-            TrafficLight trafficLight = new TrafficLight();
+            TrafficLight trafficLight = new TrafficLight(pins);
+
+            // set shutdow state for this pin
+            gpio.setShutdownOptions(true, PinState.LOW, trafficLight.getPins());
 
             //sub to control channel
             registerToControlChannel(client, MQTT_BASIC_TOPIC, publisherId, trafficLight);
@@ -145,6 +157,7 @@ public class AuthProducer {
             //Disconnect from the broker and close the connection
             client.disconnect();
             client.close();
+            gpio.shutdown();
 
             logger.info("Disconnected !");
 
