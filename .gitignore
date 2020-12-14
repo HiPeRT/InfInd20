@@ -36,3 +36,5 @@
 *.opt
 *.bootinfo*
 *.compileinfo
+
+target/
