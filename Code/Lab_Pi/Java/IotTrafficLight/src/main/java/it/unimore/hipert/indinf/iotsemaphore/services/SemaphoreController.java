@@ -14,7 +14,7 @@ public class SemaphoreController implements IMessageListener, ISemaphoreControll
     private final Dictionary<SemaphoreMode, ISemaphoreFsm> semaphoreFsms;
     private SemaphoreMode currentMode;
 
-    public SemaphoreController(IMessageReceiver messageReceiver, IConfiguration configuration) {
+    public SemaphoreController(IMessageReceiver messageReceiver, ILightsController lightsController) {
         // Register to listen to messages
         messageReceiver.registerListener(this);
 
@@ -23,7 +23,7 @@ public class SemaphoreController implements IMessageListener, ISemaphoreControll
 
         // Register FSMs
         semaphoreFsms = new Hashtable<SemaphoreMode, ISemaphoreFsm>();
-        semaphoreFsms.put(SemaphoreMode.ITALIAN_LIGHTS, new ItalianSemaphore(configuration));
+        semaphoreFsms.put(SemaphoreMode.ITALIAN_LIGHTS, new ItalianSemaphore(lightsController));
         semaphoreFsms.put(SemaphoreMode.BLINKING_YELLOW, new BlinkingYellowSemaphore());
     }
 

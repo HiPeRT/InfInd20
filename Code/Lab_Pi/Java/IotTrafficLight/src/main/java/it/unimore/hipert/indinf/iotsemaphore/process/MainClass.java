@@ -10,8 +10,9 @@ public class MainClass {
         IJsonParser<SemaphoreConfigurationMessage> jsonParser = new GsonParser<>(SemaphoreConfigurationMessage.class);
 
         // Services
+        ILightsController lightsController = new RaspberryPiGpioController();
         IMessageReceiver mqttReceiver = new MqttReceiver(config, jsonParser);
-        ISemaphoreController semaphoreController = new SemaphoreController(mqttReceiver, config);
+        ISemaphoreController semaphoreController = new SemaphoreController(mqttReceiver, lightsController);
         Runnable semaphoreFsmThread = new SemaphoreFsmThread(semaphoreController);
 
         // Start services and threads
