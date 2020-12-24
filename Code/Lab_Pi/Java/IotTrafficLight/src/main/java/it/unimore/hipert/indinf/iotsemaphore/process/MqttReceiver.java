@@ -1,8 +1,7 @@
 package it.unimore.hipert.indinf.iotsemaphore.process;
 
 import it.unimore.hipert.indinf.iotsemaphore.model.SemaphoreConfigurationMessage;
-import it.unimore.hipert.indinf.iotsemaphore.services.IConfiguration;
-import it.unimore.hipert.indinf.iotsemaphore.services.IJsonParser;
+import it.unimore.hipert.indinf.iotsemaphore.services.*;
 import org.eclipse.paho.client.mqttv3.IMqttClient;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttClientPersistence;
@@ -11,9 +10,14 @@ import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
-public class MqttReceiver {
+/**
+ * Receive from Mwtt a new ConfigMessage, and dispatch to listeners
+ */
+public class MqttReceiver implements IMessageReceiver {
     private final static Logger logger = LoggerFactory.getLogger(MqttReceiver.class);
 
     //IP Address of the target MQTT Broker
@@ -29,7 +33,9 @@ public class MqttReceiver {
 
     private IJsonParser<SemaphoreConfigurationMessage> jsonParser;
 
-    public MqttReceiver(IConfiguration config, IJsonParser<SemaphoreConfigurationMessage> parser)
+    private List<IMessageListener> listeners;
+
+    public MqttReceiver(IConfiguration config, IJsonParser parser)
     {
         this.brokerAddress = config.getMqttBrokerAddress();
         this.brokerPort = config.getMqttBrokerPort();
@@ -38,6 +44,7 @@ public class MqttReceiver {
         this.mqttBasicTopic = config.getMqttBasicTopic();
 
         this.jsonParser = parser;
+        this.listeners = new ArrayList<>();
     }
 
     public void start()     {
@@ -82,12 +89,22 @@ public class MqttReceiver {
                 byte[] payload = msg.getPayload();
                 logger.info("Message Received ({}) Message Received: {}", topic, new String(payload));
                 SemaphoreConfigurationMessage message = this.jsonParser.parseObject(payload);
-
+                NotifyAllListeners(message);
             });
 
         }catch (Exception e){
             e.printStackTrace();
         }
+    }
 
+    private void NotifyAllListeners(SemaphoreConfigurationMessage message) {
+        for (IMessageListener lister: listeners) {
+            lister.onMessageReceived(message);
+        }
+    }
+
+    @Override
+    public void registerListener(IMessageListener messageListener) {
+        listeners.add(messageListener);
     }
 }
