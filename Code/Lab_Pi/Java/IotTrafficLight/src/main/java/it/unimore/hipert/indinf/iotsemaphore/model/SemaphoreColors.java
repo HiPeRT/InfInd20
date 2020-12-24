@@ -6,6 +6,5 @@ public enum SemaphoreColors {
     GREENYELLOW, // 2
     RED, // 3
     REDYELLOW, // 4
-    YELLOW, // 5
-    BLINKING
+    YELLOW // 5
 }

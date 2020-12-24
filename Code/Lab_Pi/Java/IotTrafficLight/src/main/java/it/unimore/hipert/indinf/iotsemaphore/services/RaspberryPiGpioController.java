@@ -6,6 +6,5 @@ public class RaspberryPiGpioController implements ILightsController{
     @Override
     public void changeLightColors(SemaphoreColors currentState) {
         System.out.println("Now lights are " + currentState);
-
     }
 }

@@ -22,11 +22,11 @@ public class ItalianSemaphore implements ISemaphoreFsm {
         this.lightsController = lightsController;
     }
 
-    private void Mfn() {
+    private void mfn() {
         lightsController.changeLightColors(this.currentState);
     }
 
-    private void Sfn() {
+    private void sfn() {
         // Time to change our color
         switch (this.currentState) {
             case RED:
@@ -49,14 +49,15 @@ public class ItalianSemaphore implements ISemaphoreFsm {
      * MFN and SFN are together here
      */
     @Override
-    public void changeState() {
+    public void maybeChangeState() {
 
         this.counter--;
 
         if(this.counter == 0) {
-            Sfn();
-            Mfn();
+            sfn();
+            mfn(); // This makes it a Mealy machine: this is only triggered at change of status
         }
+        //mfn(); // Put it here to implement a Moore machine, that fires output at every state
 
     }
 }

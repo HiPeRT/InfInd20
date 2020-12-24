@@ -24,7 +24,7 @@ public class SemaphoreController implements IMessageListener, ISemaphoreControll
         // Register FSMs
         semaphoreFsms = new Hashtable<SemaphoreMode, ISemaphoreFsm>();
         semaphoreFsms.put(SemaphoreMode.ITALIAN_LIGHTS, new ItalianSemaphore(lightsController));
-        semaphoreFsms.put(SemaphoreMode.BLINKING_YELLOW, new BlinkingYellowSemaphore());
+        semaphoreFsms.put(SemaphoreMode.BLINKING_YELLOW, new BlinkingYellowSemaphore(lightsController));
     }
 
     @Override
@@ -44,6 +44,6 @@ public class SemaphoreController implements IMessageListener, ISemaphoreControll
 
     @Override
     public void tick() {
-        this.semaphoreFsms.get(this.currentMode).changeState();
+        this.semaphoreFsms.get(this.currentMode).maybeChangeState();
     }
 }
