@@ -1,3 +1,26 @@
+# Scritto 25 Gennaio 2021
+
+| Matricola | Esito (crocette) | Esito (totale) | Note               |
+| --------- | ---------------- | -------------- | ------------------ |
+| 128860    | 8                | INS            |                    |
+| 130112    | 15               | 27             | Orale              |
+| 128524    | 16.5             | 27             |                    |
+| 130305    | 8                | INS            |                    |
+| 129188    | 14.5             | 15             | Orale necessario   |
+| 134978    |                  | ASS            | Rifiutato          |
+| 134715    | 13               | 19             |                    |
+| 132313    | 12               | 25             |                    |
+| 134982    | 4                | INS            |                    |
+| 128665    | 15               | 18             |                    |
+| 136225    | 13               | 15             | Orale necessario   |
+| 133276    | 8                | INS            | Orale o progetto   |
+| 130143    | 12               | 17             | Orale necessario   |
+| 133493    | 16.5             | 25             |                    |
+| 134742    | 18               | 29             |                    |
+| 136075    |                  | ASS            |                    |
+| 146879    | 1.5              | INS            |                    |
+| 129080    | 5.5              | INS            |                    |
+
 # Scritto 21 Dicembre 2020
 
 | Matricola | Esito (crocette) | Esito (totale) | Note                                            |
