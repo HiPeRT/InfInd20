@@ -1,3 +1,30 @@
+# Scritto 22 Febbraio 2021
+
+Per evitare discrepanze dovuti alla domanda #1, non prevista per l'esame, ma erroneamente inserita nel compito, si è proceduto come segue:
+
+- Si è proceduto a correggere le domande a risposta libera per chi ha totalizzato più di 3 punti alle domande a crocette (invece di 9, come originariamente previsto)
+- Chi ha risposto correttamente alla domanda 1, ha ricevuto +3 punti
+- Chi non ha risposto, o ha risposto erroneamente alla domanda 1, ha ricevuto 0 punti (quindi, la risposta è stata "ignorata"), ma il voto complessivo del compito è stato normalizzato a 30, pertanto moltiplicato per 1.11 (cioè 30/27). In seguito, il voto complessivo è stato arrotondato all'unità successiva se superiore a .75 centesimi (es: 25.6 diventa 25; 25.8 diventa 26)
+
+| Matricola | Esito (crocette) | Esito (scritto) | Esito (normalizzato) | Esito (totale) | Note                                         |
+|-----------|------------------|-----------------|----------------------|----------------|----------------------------------------------|
+| 128860    | 10               | 12              | 13.33333333          | 13             | Orale necessario                             |
+| 130112    |                  | -               |                      |                |                                              |
+| 130305    | 11               | 16              | 17.77777778          | 18             |                                              |
+| 134978    | 10.5             | 15.5            |                      | 15             | Orale necessario                             |
+| 134982    |                  | -               |                      | 28             | Precedentemente sostenuto in data 12 Gennaio |
+| 129042    | 11.5             | 16.5            |                      | 16             | Orale necessario                             |
+| 130975    | 11               | 23              | 25.55555556          | 25             |                                              |
+| 128665    | 12               | 19              | 21.11111111          | 21             |                                              |
+| 130301    | 11               | 24              | 26.66666667          | 26             |                                              |
+| 130054    | 11.5             | 20.5            | 22.77777778          | 23             |                                              |
+| 136225    | 9                | 17              | 18.88888889          | 19             |                                              |
+| 133276    | 7.5              | 16.5            | 18.33333333          | 18             |                                              |
+| 130143    | 13               | 25              | 27.77777778          | 28             |                                              |
+| 136075    | 10.5             | 13.5            | 15                   | 15             | Orale necessario                             |
+| 146879    | 2.5              | 2.5             |                      | INS            |                                              |
+| 129080    | 15               | 25              |                      | 25             |                                              |
+
 # Scritto 25 Gennaio 2021
 
 | Matricola | Esito (crocette) | Esito (totale) | Note               |
